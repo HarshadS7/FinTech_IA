@@ -294,34 +294,6 @@ function Analysis() {
   )
 }
 
-function Quiz() {
-  const [i, setI] = useState(0)
-  const [pick, setPick] = useState(null)
-  const [score, setScore] = useState(0)
-  const done = i >= D.QUIZ.length
-  const q = D.QUIZ[i]
-  const choose = k => { if (pick !== null) return; setPick(k); if (k === q[2]) setScore(s => s + 1) }
-  return (
-    <Section id="quiz" title="Test yourself" sub="Five quick questions to check what you took away.">
-      <div className="panel quiz">
-        {done ? (
-          <div className="center"><h3>You scored {score} / {D.QUIZ.length}</h3><p>{score === 5 ? 'Perfect. You know the story.' : 'Revisit the timeline and stakeholder sections, then try again.'}</p>
-            <button className="btn primary" onClick={() => { setI(0); setPick(null); setScore(0) }}>Try again</button></div>
-        ) : (
-          <>
-            <p className="small">Question {i + 1} of {D.QUIZ.length}</p>
-            <h3>{q[0]}</h3>
-            <div className="opts">
-              {(q[1] as string[]).map((o, k) => <button key={o} onClick={() => choose(k)} className={pick === null ? '' : k === q[2] ? 'good' : k === pick ? 'bad' : 'dim'}>{o}</button>)}
-            </div>
-            {pick !== null && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="expl"><p>{q[3]}</p><button className="btn primary" onClick={() => { setI(i + 1); setPick(null) }}>{i === D.QUIZ.length - 1 ? 'See score' : 'Next →'}</button></motion.div>}
-          </>
-        )}
-      </div>
-    </Section>
-  )
-}
-
 function Sources() {
   return (
     <Section id="sources" title="Sources & methodology">
@@ -358,7 +330,6 @@ export default function App() {
           <Stakeholders />
           <Fintech />
           <Analysis />
-          <Quiz />
           <Sources />
         </main>
       </Footer>

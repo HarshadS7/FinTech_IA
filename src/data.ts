@@ -1,6 +1,6 @@
 export const NAV = [
   ['home', 'Overview'], ['timeline', 'Timeline'], ['notes', 'Notes'], ['stakeholders', 'Stakeholders'],
-  ['fintech', 'FinTech'], ['analysis', 'Analysis'], ['quiz', 'Quiz'], ['sources', 'Sources'],
+  ['fintech', 'FinTech'], ['analysis', 'Analysis'], ['sources', 'Sources'],
 ]
 
 export const EVENTS = [
@@ -143,10 +143,3 @@ export const SOURCES = [
   ['PIB: UPI completes 10 years', 'UPI scale and growth context.', 'https://www.pib.gov.in/PressReleasePage.aspx?PRID=2257087&reg=3&lang=2'],
 ]
 
-export const QUIZ = [
-  ['Which of these was NOT a demonetisation?', ['1946', '1978', '2016', '2023 ₹2,000 withdrawal'], 3, 'In 2023 the ₹2,000 note stayed legal tender, so it was a withdrawal from circulation.'],
-  ['What share of currency value did ₹500 and ₹1,000 notes hold before 8 Nov 2016?', ['About 14%', 'About 50%', 'About 86%', 'About 99%'], 2, 'About 86% by value (Economic Survey 2016–17).'],
-  ['Which group carried the biggest operational load in 2016?', ['Banks', 'Merchants', 'Students', 'Tourists'], 0, 'Banks handled exchange, counting, new-note distribution, liquidity, ATM recalibration and queues.'],
-  ['When did UPI go live?', ['After demonetisation, Dec 2016', 'August 2016', 'January 2018', '2019'], 1, 'UPI was piloted in April 2016 and went live in August 2016, so digital growth is not solely due to demonetisation.'],
-  ['Which statement is correct?', ['Wealth equals black money', 'Everyone was affected identically', 'Impact depended on access, location and cash dependence', 'Demonetisation alone caused all digital growth'], 2, 'Impact varied by bank/ATM access, location, digital availability and cash dependence.'],
-]
