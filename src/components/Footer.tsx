@@ -5,12 +5,6 @@ import { ArrowUp, Heart, IndianRupee } from 'lucide-react'
 import MicroSlats from './MicroSlats'
 import { NAV } from '../data'
 
-const SOCIALS = [
-  { href: 'https://x.com/CSI_KJSCE', icon: faXTwitter, label: 'Twitter' },
-  { href: 'https://www.instagram.com/csikjsce', icon: faInstagram, label: 'Instagram' },
-  { href: 'https://github.com/CSI-KJSCE', icon: faGithub, label: 'GitHub' },
-  { href: "https://www.linkedin.com/company/csi---kjsce-student's-chapter", icon: faLinkedin, label: 'LinkedIn' },
-]
 
 const SLATS = { color: '#8fd0ab', glintColor: '#ffffff', backgroundColor: '#f9fdfa', slatWidth: 24, slatHeight: 60, gap: 4 }
 
@@ -77,7 +71,7 @@ export default function Footer({ children }: { children: React.ReactNode }) {
       </div>
       <footer className="sticky bottom-0 z-[5] border-t border-border bg-white/55 backdrop-blur-xl">
         <div className="mx-auto max-w-[1080px] px-5 pt-14 pb-10">
-          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr]">
+          <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-[1fr_auto_auto] md:gap-x-20">
             <div>
               <a href="#home" className="flex items-center gap-3 no-underline">
                 <span className="logo"><IndianRupee size={18} strokeWidth={2.25} color="#fff" aria-label="Rupee" /></span>
@@ -98,21 +92,6 @@ export default function Footer({ children }: { children: React.ReactNode }) {
               </ul>
             </div>
   
-            <div>
-              <h4 className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">Connect</h4>
-              <ul className="mt-4 space-y-3 text-sm">
-                {SOCIALS.map(s => (
-                  <li key={s.label}>
-                    <a href={s.href} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 text-muted-foreground no-underline transition-colors hover:text-foreground">
-                      <span className="grid h-8 w-8 place-items-center rounded-md border border-border bg-white text-[#111] transition-colors group-hover:border-primary">
-                        <FontAwesomeIcon icon={s.icon} className="text-sm" />
-                      </span>
-                      <span>{s.label}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
   
           <div className="w-full overflow-hidden py-8">

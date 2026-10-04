@@ -198,23 +198,27 @@ function Notes() {
 
 function Stakeholders() {
   const [s, setS] = useState(0)
-  const [p, setP] = useState('2016')
   const sh = D.STAKEHOLDERS[s]
-  const val = sh[p]
-  const items = Array.isArray(val) ? val : [val]
+  const periods = [['Before', 'Before 2016'], ['2016', 'During 2016'], ['After', 'After 2016']]
   return (
-    <Section id="stakeholders" title="Stakeholder impact" sub="Effects were not identical for everyone. Pick a group and a period.">
+    <Section id="stakeholders" title="Stakeholder impact" sub="Effects were not identical for everyone. Pick a group to compare before, during and after 2016.">
       <div className="chips">
         {D.STAKEHOLDERS.map((x, i) => <button key={x.id} className={i === s ? 'on' : ''} onClick={() => setS(i)}><span><Icon name={x.icon} size={16} /></span>{x.name}</button>)}
       </div>
-      <div className="seg">
-        {['Before', '2016', 'After'].map(x => <button key={x} className={p === x ? 'on' : ''} onClick={() => setP(x)}>{x}</button>)}
-      </div>
+      <h3 className="sh-name"><Icon name={sh.icon} size={22} /> {sh.name}</h3>
       <AnimatePresence mode="wait">
-        <motion.div key={s + p} className="panel" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-          <h3><Icon name={sh.icon} size={22} /> {sh.name} <span className="tag">{p === '2016' ? 'During 2016' : p}</span></h3>
-          <ul className="bul">{items.map(t => <li key={t}>{t}</li>)}</ul>
-          {sh.warn && p === '2016' && <div className="callout inline"><b>Careful</b><p>{sh.warn}</p></div>}
+        <motion.div key={s} className="sh-cols" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }}>
+          {periods.map(([k, label], i) => {
+            const val = sh[k]
+            const items = Array.isArray(val) ? val : [val]
+            return (
+              <motion.div key={k} className="panel sh-col" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: i * 0.08 }} whileHover={{ y: -6 }}>
+                <span className="tag">{label}</span>
+                <ul className="bul">{items.map(t => <li key={t}>{t}</li>)}</ul>
+                {sh.warn && k === '2016' && <div className="callout sh-warn"><b>Careful</b><p>{sh.warn}</p></div>}
+              </motion.div>
+            )
+          })}
         </motion.div>
       </AnimatePresence>
       <h3>Stakeholder matrix</h3>
