@@ -63,28 +63,28 @@ export const NOTES = [
 ]
 
 export const STAKEHOLDERS = [
-  { id: 'person', name: 'Normal person', icon: '🧑',
+  { id: 'person', name: 'Normal person', icon: 'User',
     Before: 'Cash was heavily used for everyday transactions.',
     '2016': ['Difficulty accessing usable cash, queues and withdrawal limits.', 'Need to deposit or exchange old notes.', 'Difficulty with some cash purchases.', 'Impact depended on access to banks and ATMs, location, digital payment availability and cash dependence.'],
     After: 'Cash availability gradually normalised; cards, wallets, UPI and other digital channels continued alongside cash.' },
-  { id: 'merchant', name: 'Merchant', icon: '🏪',
+  { id: 'merchant', name: 'Merchant', icon: 'Store',
     Before: 'Many small merchants depended heavily on cash.',
     '2016': ['Customers held invalid old notes and cash purchases fell.', 'Payment delays and cash-flow problems were possible.', 'Merchants accepting cards, wallets or QR payments had alternative channels.'],
     After: 'Digital acceptance became increasingly useful while cash remained important.' },
-  { id: 'rural', name: 'Rural / cash-dependent worker', icon: '🌾',
+  { id: 'rural', name: 'Rural / cash-dependent worker', icon: 'Wheat',
     Before: 'Cash wages and local cash-based commerce were common.',
     '2016': ['Effects varied with access to banks, ATMs, connectivity and digital infrastructure.', 'Possible short-term disruption to cash wages, purchases, informal activity and local commerce.', 'Not every rural person was affected identically.'],
     After: 'Recovery and adaptation again depended on banking access and local infrastructure.' },
-  { id: 'bank', name: 'Bank', icon: '🏦',
+  { id: 'bank', name: 'Bank', icon: 'Landmark',
     Before: 'Normal cash handling and ATM operations.',
     '2016': ['Very high operational load: deposit and exchange of old notes.', 'Counting cash, distributing new notes and managing liquidity.', 'Recalibrating ATMs and handling queues.'],
     After: 'Cash circulation normalised and digital banking channels continued developing.' },
-  { id: 'cash', name: 'Cash-intensive / high-income group', icon: '💼',
+  { id: 'cash', name: 'Cash-intensive / high-income group', icon: 'Briefcase',
     Before: 'Cash holdings varied widely by person and business.',
     '2016': ['Impact depended on the amount of cash held, the nature/source of funds, and the ability to deposit and explain them.', 'Possible effects: large cash deposits, documentation, banking records and compliance/tax implications.'],
     After: 'More transactions and deposits sat in banking records.',
     warn: 'Wealth, cash holdings and illegal money are not the same thing.' },
-  { id: 'gov', name: 'Government', icon: '🏛',
+  { id: 'gov', name: 'Government', icon: 'Building2',
     Before: 'Cash-heavy economy with a large share of value in high-denomination notes.',
     '2016': ['Stated objectives: unaccounted money, counterfeit currency, illicit use of high-denomination notes, formalisation/digitalisation, tax compliance.', 'Immediate operations: printing and distributing new notes, bank and ATM logistics, deposit/exchange rules.'],
     After: 'Open questions: how much unaccounted money was addressed, how much digital growth is attributable to demonetisation versus other factors, and the effect on formalisation.' },
@@ -103,11 +103,11 @@ export const MATRIX_HEAD = ['Stakeholder', 'Cash disruption', 'Banking impact', 
 export const QBARS = [['Normal person', 50], ['Small merchant', 50], ['Rural / cash-dependent', 50], ['Bank', 95], ['Cash-intensive', 65], ['Government', 75]]
 
 export const FLOW = [
-  ['Cash economy', '💵', 'Physical currency was heavily used.'],
-  ['2016 shock', '⚡', '₹500 and ₹1,000 lost legal-tender status.'],
-  ['Banking system', '🏦', 'Deposits, withdrawals, liquidity and ATM operations.'],
-  ['Digital options', '📱', 'Cards, wallets, UPI and QR payments.'],
-  ['New habits', '🔁', 'Multiple payment channels alongside cash.'],
+  ['Cash economy', 'Banknote', 'Physical currency was heavily used.'],
+  ['2016 shock', 'Zap', '₹500 and ₹1,000 lost legal-tender status.'],
+  ['Banking system', 'Landmark', 'Deposits, withdrawals, liquidity and ATM operations.'],
+  ['Digital options', 'Smartphone', 'Cards, wallets, UPI and QR payments.'],
+  ['New habits', 'Repeat', 'Multiple payment channels alongside cash.'],
 ]
 
 export const WHY = [
@@ -121,12 +121,12 @@ export const WHY = [
 ]
 
 export const LENSES = [
-  ['💵', 'Cash', 'Immediate availability and cash dependence.'],
-  ['🏦', 'Banking', 'Deposits, withdrawals, queues, liquidity and ATM operations.'],
-  ['📱', 'Digital payments', 'Cards, wallets, UPI and QR.'],
-  ['🛒', 'Business activity', 'Sales, wages and cash-intensive activity.'],
-  ['📑', 'Formalisation', 'Financial flows entering the banking system.'],
-  ['🪙', 'Currency', 'New denominations, ATM recalibration and distribution.'],
+  ['Banknote', 'Cash', 'Immediate availability and cash dependence.'],
+  ['Landmark', 'Banking', 'Deposits, withdrawals, queues, liquidity and ATM operations.'],
+  ['Smartphone', 'Digital payments', 'Cards, wallets, UPI and QR.'],
+  ['ShoppingCart', 'Business activity', 'Sales, wages and cash-intensive activity.'],
+  ['FileText', 'Formalisation', 'Financial flows entering the banking system.'],
+  ['Coins', 'Currency', 'New denominations, ATM recalibration and distribution.'],
 ]
 
 export const GOV = [

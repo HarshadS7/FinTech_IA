@@ -2,19 +2,31 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence, useInView, useScroll, useSpring, animate } from 'framer-motion'
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, LabelList } from 'recharts'
 import * as D from './data'
-import MicroSlats from './components/MicroSlats'
+import Footer from './components/Footer'
+import PillNav from './components/PillNav'
+import * as L from 'lucide-react'
+import Lenis from 'lenis'
 
-const fade = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-60px' }, transition: { duration: 0.5 } }
+function Icon({ name, size = 22 }: { name: string; size?: number }) {
+  const C = (L as any)[name] || L.Circle
+  return <C size={size} strokeWidth={1.5} color="#111" aria-hidden="true" />
+}
+
+const fade = { initial: { opacity: 0, y: 32 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true, margin: '-60px' }, transition: { duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] as any } }
 
 function Section({ id, title, sub, children }: { id: string; title: string; sub?: string; children?: React.ReactNode }) {
   return (
-    <section id={id} className="wrap">
+    <motion.section id={id} className="wrap sec"
+      initial={{ opacity: 0, y: 120, filter: 'blur(10px)' }}
+      whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+      viewport={{ once: true, amount: 0.12 }}
+      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}>
       <motion.div {...fade}>
         <h2>{title}<span className="rule" /></h2>
         {sub && <p className="sub">{sub}</p>}
       </motion.div>
       {children}
-    </section>
+    </motion.section>
   )
 }
 
@@ -60,11 +72,20 @@ function Nav() {
   return (
     <header className="nav">
       <div className="nav-in">
-        <a href="#home" className="brand"><span className="logo">₹</span><span><b>Demonetisation</b><small>Impact Explorer</small></span></a>
-        <nav className={open ? 'open' : ''}>
-          {D.NAV.map(([id, l]) => <a key={id} href={'#' + id} className={active === id ? 'on' : ''} onClick={() => setOpen(false)}>{l}</a>)}
-        </nav>
-        <button className="ib burger" aria-label="Menu" onClick={() => setOpen(!open)}>☰</button>
+        <PillNav
+          logo={<L.IndianRupee size={18} strokeWidth={2.25} color="#fff" aria-label="Rupee" />}
+          items={D.NAV.map(([id, label]) => ({ label, href: '#' + id }))}
+          activeHref={'#' + active}
+          ease="power2.easeOut"
+          baseColor="var(--acc)"
+          pillColor="transparent"
+          hoveredPillTextColor="#fff"
+          pillTextColor="var(--mute)"
+          initialLoadAnimation={false}
+          mobileOpen={open}
+          onItemClick={() => setOpen(false)}
+        />
+        <button className="ib burger" aria-label="Menu" onClick={() => setOpen(!open)}><Icon name="Menu" size={18} /></button>
       </div>
     </header>
   )
@@ -109,10 +130,10 @@ function Hero({ goEvent }) {
 }
 
 function Questions() {
-  const q = [['❓', 'What changed?', 'Which notes lost legal-tender status, when, and what replaced them.'], ['👥', 'Who was affected?', 'Individuals, merchants, rural workers, banks, cash-heavy holders and government.'], ['⏱', 'Before and after?', 'Cash, banking operations and digital payments around each episode.']]
+  const q = [['HelpCircle', 'What changed?', 'Which notes lost legal-tender status, when, and what replaced them.'], ['Users', 'Who was affected?', 'Individuals, merchants, rural workers, banks, cash-heavy holders and government.'], ['Timer', 'Before and after?', 'Cash, banking operations and digital payments around each episode.']]
   return (
     <section className="wrap tight"><div className="grid3">
-      {q.map(([i, t, d]) => <motion.div key={t} {...fade} className="card"><div className="ico">{i}</div><h4>{t}</h4><p>{d}</p></motion.div>)}
+      {q.map(([i, t, d]) => <motion.div key={t} {...fade} className="card"><div className="ico"><Icon name={i} /></div><h4>{t}</h4><p>{d}</p></motion.div>)}
     </div></section>
   )
 }
@@ -184,14 +205,14 @@ function Stakeholders() {
   return (
     <Section id="stakeholders" title="Stakeholder impact" sub="Effects were not identical for everyone. Pick a group and a period.">
       <div className="chips">
-        {D.STAKEHOLDERS.map((x, i) => <button key={x.id} className={i === s ? 'on' : ''} onClick={() => setS(i)}><span>{x.icon}</span>{x.name}</button>)}
+        {D.STAKEHOLDERS.map((x, i) => <button key={x.id} className={i === s ? 'on' : ''} onClick={() => setS(i)}><span><Icon name={x.icon} size={16} /></span>{x.name}</button>)}
       </div>
       <div className="seg">
         {['Before', '2016', 'After'].map(x => <button key={x} className={p === x ? 'on' : ''} onClick={() => setP(x)}>{x}</button>)}
       </div>
       <AnimatePresence mode="wait">
         <motion.div key={s + p} className="panel" initial={{ opacity: 0, x: 16 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
-          <h3>{sh.icon} {sh.name} <span className="tag">{p === '2016' ? 'During 2016' : p}</span></h3>
+          <h3><Icon name={sh.icon} size={22} /> {sh.name} <span className="tag">{p === '2016' ? 'During 2016' : p}</span></h3>
           <ul className="bul">{items.map(t => <li key={t}>{t}</li>)}</ul>
           {sh.warn && p === '2016' && <div className="callout inline"><b>Careful</b><p>{sh.warn}</p></div>}
         </motion.div>
@@ -214,7 +235,7 @@ function Fintech() {
       <div className="flow">
         {D.FLOW.map(([n, ic], i) => (
           <button key={n} className={'fl' + (i === f ? ' on' : '')} onClick={() => setF(i)}>
-            <span className="fi">{ic}</span><b>{n}</b><span className="fn">{i + 1}</span>
+            <span className="fi"><Icon name={ic} size={28} /></span><b>{n}</b><span className="fn">{i + 1}</span>
           </button>
         ))}
       </div>
@@ -238,7 +259,7 @@ function Fintech() {
 function Analysis() {
   return (
     <Section id="analysis" title="Impact analysis" sub="Six lenses for looking at what changed.">
-      <div className="grid3">{D.LENSES.map(([i, t, d], k) => <motion.div key={t} {...fade} transition={{ delay: k * 0.05 }} className="card lens"><div className="ico">{i}</div><h4>{t}</h4><p>{d}</p></motion.div>)}</div>
+      <div className="grid3">{D.LENSES.map(([i, t, d], k) => <motion.div key={t} {...fade} transition={{ delay: k * 0.05 }} className="card lens"><div className="ico"><Icon name={i} /></div><h4>{t}</h4><p>{d}</p></motion.div>)}</div>
 
       <h3>What the documented figures show</h3>
       <div className="grid3">
@@ -310,27 +331,33 @@ function Sources() {
 
 export default function App() {
   const [idx, setIdx] = useState(2)
+  useEffect(() => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const lenis = new Lenis({ duration: 1.4, easing: t => 1 - Math.pow(1 - t, 4), anchors: { offset: -90 } })
+    let id = 0
+    const raf = (t: number) => { lenis.raf(t); id = requestAnimationFrame(raf) }
+    id = requestAnimationFrame(raf)
+    return () => { cancelAnimationFrame(id); lenis.destroy() }
+  }, [])
   const { scrollYProgress } = useScroll()
   const sx = useSpring(scrollYProgress, { stiffness: 120, damping: 24 })
   return (
     <>
-      <div className="bg-fx" aria-hidden="true">
-        <MicroSlats color="#8fd0ab" glintColor="#ffffff" backgroundColor="#f9fdfa" interactive slatWidth={24} slatHeight={60} gap={4}/>
-      </div>
       <motion.div className="progress" style={{ scaleX: sx }} />
       <Nav />
-      <main>
-        <Hero goEvent={setIdx} />
-        <Questions />
-        <Timeline idx={idx} setIdx={setIdx} />
-        <Notes />
-        <Stakeholders />
-        <Fintech />
-        <Analysis />
-        <Quiz />
-        <Sources />
-      </main>
-      <footer><div className="wrap foot"><div><b>₹ Demonetisation Impact Explorer</b><br /><span className="small">FinTech MDM · Group Internal Assessment · K.J. Somaiya College of Engineering</span></div><a href="#home" className="btn">Back to top ↑</a></div></footer>
+      <Footer>
+        <main>
+          <Hero goEvent={setIdx} />
+          <Questions />
+          <Timeline idx={idx} setIdx={setIdx} />
+          <Notes />
+          <Stakeholders />
+          <Fintech />
+          <Analysis />
+          <Quiz />
+          <Sources />
+        </main>
+      </Footer>
     </>
   )
 }
