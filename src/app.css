@@ -99,3 +99,4 @@ thead th{background:var(--accbg);color:var(--acc);font-size:12px;letter-spacing:
 .sh-col .tag{margin-left:0;padding:7px 16px;font-size:13.5px;letter-spacing:.1em;font-weight:700;color:#fff;background:#1f6b45;border-color:#1f6b45}
 .sh-col .bul{margin-top:16px}
 @media (max-width:820px){.sh-cols{grid-template-columns:1fr}}
+#sources{padding-bottom:120px}

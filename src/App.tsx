@@ -298,9 +298,6 @@ function Sources() {
   return (
     <Section id="sources" title="Sources & methodology">
       <div className="grid3">{D.SOURCES.map(([t, d, u]) => <motion.a key={t} {...fade} href={u} target="_blank" rel="noreferrer" className="card link"><h4>{t} ↗</h4><p>{d}</p></motion.a>)}</div>
-      <div className="callout"><b>Our rules</b>
-        <ul className="bul sm"><li>No invented statistics. Every figure is attributed.</li><li>No political judgement on the policy.</li><li>Wealth, cash holdings and illegal money are not the same thing.</li><li>No winners-and-losers ranking.</li><li>No claim that demonetisation alone caused digital-payment growth.</li></ul></div>
-      <p className="small">Academic prototype. Add exact citations (titles, dates, page numbers) as required by faculty. <b>Limitation:</b> this is descriptive and does not measure the total economic effect of demonetisation.</p>
     </Section>
   )
 }
